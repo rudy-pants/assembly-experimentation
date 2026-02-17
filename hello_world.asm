@@ -31,8 +31,8 @@ section '.code' code readable executable
 
 start:
     ; Step 1: Get stdout HANDLE from the PEB via GS segment register
-    ; gs:[0x60] = PEB*, PEB+0x20 = ProcessParameters, +0x30 = StandardOutput
-    mov  rax, gs:[0x60]
+    ; Correct FASM syntax: [gs:offset] not gs:[offset]
+    mov  rax, [gs:0x60]
     mov  rax, [rax + 0x20]
     mov  rbx, [rax + 0x30]
 
