@@ -59,13 +59,19 @@ start:
     mov  eax, SYSCALL_NtWriteFile
     syscall
 
+    ; save NTSTATUS
+    mov  rsi, rax
+
     add  rsp, 72
 
     ; Step 3: NtTerminateProcess
     sub  rsp, 40
 
     mov  rcx, -1
-    xor  rdx, rdx
+    
+    ; xor  rdx, rdx
+    ; exit with the NtWriteFile status code
+    mov  rdx, rsi
 
     mov  eax, SYSCALL_NtTerminateProcess
     syscall
