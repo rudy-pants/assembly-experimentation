@@ -1,6 +1,5 @@
 ; =============================================================================
-; hello_msgbox.asm — Hello World using Win32 MessageBox instead of raw syscalls
-; This uses the import table to verify the PE structure is correct
+; hello_msgbox.asm — Hello World using Win32 MessageBox
 ; =============================================================================
 
 format PE64 GUI
@@ -8,14 +7,10 @@ entry start
 
 section '.idata' import data readable writeable
 
-    library kernel32,'KERNEL32.DLL',\
-            user32,'USER32.DLL'
+    library kernel32,'KERNEL32.DLL',user32,'USER32.DLL'
 
-    import kernel32,\
-           ExitProcess,'ExitProcess'
-
-    import user32,\
-           MessageBoxA,'MessageBoxA'
+    import kernel32,ExitProcess,'ExitProcess'
+    import user32,MessageBoxA,'MessageBoxA'
 
 section '.data' data readable writeable
     msg        db 'Hello, World!',0
